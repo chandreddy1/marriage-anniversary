@@ -2,131 +2,271 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
 <title>Happy 15th Anniversary ❤️</title>
 
 <style>
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding: 0;
     text-align: center;
     font-family: Georgia, serif;
-    background: linear-gradient(to bottom, #fff5f7, #fffaf0);
+    background: linear-gradient(135deg, #fff0f5 0%, #fff5e6 50%, #fff0f5 100%);
     color: #444;
-    overflow-x: hidden;
     min-height: 100vh;
     position: relative;
+    overflow-x: hidden;
 }
 
-/* Floating animation */
-@keyframes floatUp {
-    0% { 
-        transform: translateY(100vh) scale(0.8); 
-        opacity: 0.8; 
-    }
-    100% { 
-        transform: translateY(-20vh) scale(1.2); 
-        opacity: 0; 
-    }
+/* Floating animation - multiple variations */
+@keyframes floatUp1 {
+    0% { transform: translateY(100vh) scale(0.5) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-20vh) scale(1.5) rotate(360deg); opacity: 0; }
+}
+
+@keyframes floatUp2 {
+    0% { transform: translateY(100vh) scale(0.8) rotate(0deg); opacity: 0.9; }
+    100% { transform: translateY(-20vh) scale(1.2) rotate(-180deg); opacity: 0; }
+}
+
+@keyframes floatUp3 {
+    0% { transform: translateY(100vh) scale(0.6) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-20vh) scale(1.8) rotate(720deg); opacity: 0; }
+}
+
+@keyframes floatSide {
+    0% { transform: translate(0, 100vh) scale(0.7); opacity: 0.8; }
+    25% { transform: translate(50px, 75vh) scale(1); }
+    50% { transform: translate(-50px, 50vh) scale(1.2); }
+    75% { transform: translate(30px, 25vh) scale(1); }
+    100% { transform: translate(0, -20vh) scale(0.7); opacity: 0; }
 }
 
 .floating {
     position: fixed;
-    bottom: -10px;
+    bottom: -50px;
     pointer-events: none;
-    text-shadow: 0 0 10px rgba(255, 105, 180, 0.6), 0 0 20px rgba(255, 215, 0, 0.5);
-    animation: floatUp linear infinite;
+    text-shadow: 0 0 15px rgba(255, 20, 147, 0.8), 0 0 30px rgba(255, 215, 0, 0.6);
+    animation: floatUp1 linear infinite;
     z-index: 9999;
-    filter: drop-shadow(0 0 5px rgba(255, 192, 203, 0.8));
+    filter: drop-shadow(0 0 8px rgba(255, 105, 180, 0.9));
     will-change: transform, opacity;
+    font-size: 60px;
+}
+
+.floating:nth-child(odd) {
+    animation-name: floatUp2;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.9));
+}
+
+.floating:nth-child(3n) {
+    animation-name: floatUp3;
+    filter: drop-shadow(0 0 12px rgba(255, 0, 100, 0.8));
+}
+
+.floating:nth-child(5n+2) {
+    animation-name: floatSide;
+    animation-duration: 20s !important;
+}
+
+/* Background floating elements (non-moving) */
+.background-decor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.4;
+}
+
+.bg-emoji {
+    position: absolute;
+    font-size: 40px;
+    opacity: 0.2;
+    animation: none;
+    filter: blur(1px);
 }
 
 /* Container content */
 .container {
-    padding: 60px 20px;
+    padding: 40px 20px 60px;
     position: relative;
     z-index: 10000;
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(1px);
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(2px);
+    border-radius: 30px;
+    margin: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .gold15 {
-    font-size: 110px;
+    font-size: clamp(60px, 15vw, 110px);
     font-style: italic;
     font-weight: bold;
-    background: linear-gradient(45deg, #d4af37, gold, #fff8dc);
+    background: linear-gradient(45deg, #d4af37, #ffd700, #fff8dc, #ffd700);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: glow 2.5s infinite alternate;
-    margin: 20px 0;
+    margin: 15px 0;
+    line-height: 1.1;
 }
 
 @keyframes glow {
-    from { text-shadow: 0 0 15px rgba(212,175,55,0.6); }
-    to { text-shadow: 0 0 35px rgba(255,215,0,0.9); }
+    from { text-shadow: 0 0 20px rgba(212,175,55,0.7), 0 0 40px rgba(255,105,180,0.3); }
+    to { text-shadow: 0 0 40px rgba(255,215,0,1), 0 0 60px rgba(255,20,147,0.5); }
 }
 
 .subtitle {
-    font-size: 28px;
+    font-size: clamp(20px, 5vw, 28px);
     letter-spacing: 2px;
     color: #8b0000;
+    text-shadow: 0 0 10px rgba(255,255,255,0.8);
+    margin: 15px 0;
+    padding: 0 10px;
 }
 
 .message {
-    max-width: 700px;
-    margin: 40px auto;
-    font-size: 20px;
+    max-width: 800px;
+    margin: 30px auto;
+    font-size: clamp(16px, 4vw, 20px);
     line-height: 1.8;
-    background-color: rgba(255, 255, 255, 0.6);
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 245, 250, 0.9));
+    padding: clamp(20px, 5vw, 40px);
+    border-radius: 30px;
+    box-shadow: 0 10px 40px rgba(255, 105, 180, 0.2);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    backdrop-filter: blur(5px);
+    width: 95%;
 }
 
 .photo {
     margin-top: 30px;
+    padding: 0 15px;
 }
 
 .photo img {
-    width: 450px;
-    max-width: 90%;
-    border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-    border: 5px solid white;
+    width: min(450px, 90%);
+    max-width: 100%;
+    height: auto;
+    border-radius: 30px;
+    box-shadow: 0 20px 50px rgba(212, 175, 55, 0.4), 0 0 0 5px rgba(255, 255, 255, 0.8);
+    border: 3px solid gold;
+    transition: transform 0.3s ease;
+}
+
+.photo img:hover {
+    transform: scale(1.02);
 }
 
 .footer {
-    margin-top: 50px;
-    font-size: 18px;
-    color: #666;
-    padding-bottom: 80px;
+    margin-top: 40px;
+    font-size: clamp(16px, 4vw, 20px);
+    color: #8b0000;
+    padding-bottom: 30px;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255,255,255,0.8);
 }
 
 /* Heartbeat effect for title */
 h1 {
-    animation: heartbeat 1.5s infinite;
+    animation: heartbeat 1.5s infinite ease-in-out;
     color: #b22222;
-    text-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+    text-shadow: 0 0 20px rgba(255, 105, 180, 0.8), 0 0 40px rgba(255, 215, 0, 0.5);
+    font-size: clamp(20px, 6vw, 32px);
+    margin: 15px 0;
+    padding: 0 15px;
+    line-height: 1.4;
 }
 
 @keyframes heartbeat {
     0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+    25% { transform: scale(1.05); }
+    50% { transform: scale(1.1); }
+    75% { transform: scale(1.05); }
 }
 
+/* Mobile optimizations */
 @media (max-width: 768px) {
-    .gold15 {
-        font-size: 80px;
+    body {
+        background: linear-gradient(135deg, #fff0f5 0%, #fff5e6 100%);
     }
-    .subtitle {
-        font-size: 24px;
+    
+    .container {
+        padding: 20px 15px 40px;
+        margin: 10px;
+        backdrop-filter: blur(3px);
     }
+    
     .message {
-        font-size: 18px;
-        padding: 20px;
+        padding: 20px 15px;
+        margin: 20px auto;
+        width: 100%;
+        border-radius: 20px;
     }
+    
     .floating {
-        font-size: 40px !important;
+        font-size: 45px !important;
+        filter: drop-shadow(0 0 12px rgba(255, 105, 180, 0.9)) !important;
+    }
+    
+    h1 {
+        font-size: 24px;
+        line-height: 1.3;
+    }
+    
+    .photo img {
+        border-radius: 20px;
+        box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4), 0 0 0 3px rgba(255, 255, 255, 0.9);
+    }
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+    .gold15 {
+        font-size: 50px;
+    }
+    
+    h1 {
+        font-size: 20px;
+    }
+    
+    .subtitle {
+        font-size: 18px;
+    }
+    
+    .message {
+        font-size: 15px;
+        padding: 15px;
+    }
+}
+
+/* Landscape mode */
+@media (max-height: 500px) and (orientation: landscape) {
+    .container {
+        padding: 15px;
+    }
+    
+    .message {
+        max-height: 60vh;
+        overflow-y: auto;
+        padding: 15px;
+    }
+    
+    .gold15 {
+        font-size: 40px;
+    }
+    
+    .photo img {
+        width: 200px;
     }
 }
 </style>
@@ -134,53 +274,130 @@ h1 {
 
 <body>
 
-<!-- Floating hearts and flowers - now visible and flowing -->
+<!-- Background static decorations -->
+<div class="background-decor" id="bgDecor"></div>
+
+<!-- Main floating elements generator -->
 <script>
 (function() {
-    // Create floating elements immediately
-    const emojis = ["🌹","❤️","🌺","💖","🌷","💓","🌸","💗","💐","🥀","🌼","💕","💘","💝","🌹","❤️"];
+    // Rich collection of romantic emojis
+    const romanticEmojis = [
+        "❤️", "🧡", "💛", "💚", "💙", "💜", "💖", "💗", "💓", "💞", "💕", "💘", "💝",
+        "🌹", "🥀", "🌺", "🌸", "🌷", "🌼", "🌻", "🌿", "✨", "⭐", "🌟", "💫",
+        "💐", "🌾", "🍃", "🌸", "🌼", "🌹", "❤️‍🔥", "💌", "💋", "👩‍❤️‍👨", "💏", "👩‍❤️‍💋‍👨",
+        "💎", "👑", "💍", "🎀", "🎁", "💝", "💞", "💓", "💗", "💖", "💘", "💕"
+    ];
     
+    // More emojis for variety
+    const extraEmojis = [
+        "💟", "❣️", "💔", "❤️‍🩹", "❤️", "🧡", "💛", "💚", "💙", "💜", "🤎", "🖤", "🤍",
+        "💋", "💌", "💘", "💝", "💖", "💗", "💓", "💞", "💕", "💟", "❣️", "💔"
+    ];
+    
+    // Combine all emojis
+    const allEmojis = [...romanticEmojis, ...extraEmojis];
+    
+    // Function to create floating elements
     function createFloatingElement() {
         const span = document.createElement("div");
         span.className = "floating";
         
-        // Random horizontal position (0% to 100%)
+        // Random horizontal position (full width)
         span.style.left = Math.random() * 100 + "%";
         
-        // Random size between 30px and 90px
-        const size = 30 + Math.random() * 60;
+        // Random size between 30px and 100px
+        const size = 30 + Math.random() * 70;
         span.style.fontSize = size + "px";
         
-        // Random animation duration between 6 and 18 seconds
-        span.style.animationDuration = (6 + Math.random() * 12) + "s";
+        // Random animation duration between 8 and 25 seconds (slower = more visible)
+        span.style.animationDuration = (10 + Math.random() * 20) + "s";
         
         // Random animation delay
-        span.style.animationDelay = Math.random() * 5 + "s";
+        span.style.animationDelay = Math.random() * 10 + "s";
+        
+        // Random opacity for variety
+        span.style.opacity = 0.7 + Math.random() * 0.3;
         
         // Random emoji
-        span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        span.textContent = allEmojis[Math.floor(Math.random() * allEmojis.length)];
         
         document.body.appendChild(span);
         
-        // Remove element after animation completes to prevent memory issues
+        // Remove after animation to prevent too many elements
         setTimeout(() => {
             if (span.parentNode) {
                 span.remove();
             }
-        }, 20000); // Remove after 20 seconds
+        }, 35000);
     }
     
-    // Create initial batch of 30 floating elements
-    for (let i = 0; i < 30; i++) {
-        // Slight delay between creations for more natural effect
-        setTimeout(createFloatingElement, i * 200);
+    // Create background static decorations
+    function createBackgroundDecor() {
+        const bgDecor = document.getElementById('bgDecor');
+        for (let i = 0; i < 50; i++) {
+            const bgEmoji = document.createElement('div');
+            bgEmoji.className = 'bg-emoji';
+            bgEmoji.style.left = Math.random() * 100 + '%';
+            bgEmoji.style.top = Math.random() * 100 + '%';
+            bgEmoji.style.fontSize = (20 + Math.random() * 60) + 'px';
+            bgEmoji.style.opacity = 0.1 + Math.random() * 0.2;
+            bgEmoji.style.transform = `rotate(${Math.random() * 360}deg)`;
+            bgEmoji.textContent = allEmojis[Math.floor(Math.random() * allEmojis.length)];
+            bgDecor.appendChild(bgEmoji);
+        }
     }
     
-    // Continuously create new floating elements
+    // Create initial heavy batch (80 elements)
+    for (let i = 0; i < 80; i++) {
+        setTimeout(createFloatingElement, i * 50);
+    }
+    
+    // Create background decorations
+    createBackgroundDecor();
+    
+    // Continuously create new floating elements (very frequent)
+    setInterval(createFloatingElement, 300); // New element every 300ms
+    
+    // Additional burst every 5 seconds
     setInterval(() => {
-        createFloatingElement();
-    }, 1000); // Create a new one every second
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createFloatingElement, i * 100);
+        }
+    }, 5000);
     
+})();
+</script>
+
+<!-- Second generator for even more density -->
+<script>
+(function() {
+    const extraSymbols = ["💕","💞","💓","💗","💖","💘","💝","🌹","🌺","🌸","🌷","🌼","🥀","❤️","💫","✨","⭐","🌟","💐","🌿"];
+    
+    function createExtraFloat() {
+        const floatDiv = document.createElement("div");
+        floatDiv.className = "floating";
+        floatDiv.style.left = Math.random() * 100 + "%";
+        floatDiv.style.fontSize = (25 + Math.random() * 65) + "px";
+        floatDiv.style.animationDuration = (12 + Math.random() * 25) + "s";
+        floatDiv.style.animationDelay = Math.random() * 15 + "s";
+        floatDiv.style.opacity = 0.8 + Math.random() * 0.2;
+        floatDiv.textContent = extraSymbols[Math.floor(Math.random() * extraSymbols.length)];
+        document.body.appendChild(floatDiv);
+        
+        setTimeout(() => {
+            if (floatDiv.parentNode) {
+                floatDiv.remove();
+            }
+        }, 40000);
+    }
+    
+    // Create initial batch
+    for (let i = 0; i < 60; i++) {
+        setTimeout(createExtraFloat, i * 70);
+    }
+    
+    // Keep creating more frequently
+    setInterval(createExtraFloat, 250);
 })();
 </script>
 
@@ -193,8 +410,10 @@ h1 {
     <div class="subtitle">Years of Love • Laughter • Forever</div>
 
     <div class="photo">
-        <!-- IMPORTANT: Update this path to your actual image location -->
-        <img src="images/anniversary-photo.jpeg" alt="Our Anniversary Photo" onerror="this.style.display='none'">
+        <!-- Image with better fallback -->
+        <img src="images/anniversary-photo.jpeg" 
+             alt="Our Anniversary Photo" 
+             onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDUwIiBoZWlnaHQ9IjQ1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDUwIiBoZWlnaHQ9IjQ1MCIgZmlsbD0iI2ZmZTFlMCIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjQiIGZpbGw9IiM4YjAwMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj7inaTigI3vuI8gMTUgeWVhcnMg4p2k4oCN77iPPC90ZXh0Pjwvc3ZnPg=='">
     </div>
 
     <div class="message">
@@ -213,39 +432,24 @@ h1 {
 
 </div>
 
-<!-- Add a second script for continuous floating elements -->
+<!-- Extra burst of floating elements on page load -->
 <script>
-(function() {
-    // Additional variety of floating elements with different timing
-    const symbols = ["💕","💞","💓","💗","💖","💘","💝","🌹","🌺","🌸","🌷","🌼","🌻","🥀","❤️","🧡","💛","💚","💙","💜"];
-    
-    function createExtraFloat() {
-        const floatDiv = document.createElement("div");
-        floatDiv.className = "floating";
-        floatDiv.style.left = Math.random() * 100 + "%";
-        floatDiv.style.fontSize = (20 + Math.random() * 50) + "px";
-        floatDiv.style.animationDuration = (8 + Math.random() * 15) + "s";
-        floatDiv.style.animationDelay = Math.random() * 8 + "s";
-        floatDiv.style.opacity = "0.9";
-        floatDiv.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-        document.body.appendChild(floatDiv);
-        
-        // Clean up
+// Immediate burst on page load
+window.addEventListener('load', function() {
+    for (let i = 0; i < 30; i++) {
         setTimeout(() => {
-            if (floatDiv.parentNode) {
-                floatDiv.remove();
-            }
-        }, 25000);
+            const burst = document.createElement("div");
+            burst.className = "floating";
+            burst.style.left = Math.random() * 100 + "%";
+            burst.style.fontSize = (40 + Math.random() * 80) + "px";
+            burst.style.animationDuration = (15 + Math.random() * 30) + "s";
+            burst.style.animationDelay = "0s";
+            burst.style.opacity = "1";
+            burst.textContent = ["❤️","🌹","💖","🌺","💞","🌷","💓","🌸","💗","💐","🥀","💕"][Math.floor(Math.random() * 12)];
+            document.body.appendChild(burst);
+        }, i * 100);
     }
-    
-    // Create initial batch
-    for (let i = 0; i < 20; i++) {
-        setTimeout(createExtraFloat, i * 150);
-    }
-    
-    // Keep creating more
-    setInterval(createExtraFloat, 1200);
-})();
+});
 </script>
 
 </body>
