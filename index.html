@@ -12,7 +12,7 @@ body {
     font-family: Georgia, serif;
     background: linear-gradient(to bottom, #fff5f7, #fffaf0);
     color: #444;
-    overflow: hidden;
+    overflow-x: hidden; /* Only prevent sideways scroll */
 }
 
 /* Floating animation */
@@ -26,6 +26,7 @@ body {
     bottom: -50px;
     font-size: 24px;
     animation: floatUp linear infinite;
+    pointer-events: none; /* So they don't block scrolling */
 }
 
 /* Container content */
@@ -79,6 +80,7 @@ body {
     margin-top: 50px;
     font-size: 18px;
     color: #666;
+    padding-bottom: 80px; /* Extra space at bottom */
 }
 </style>
 </head>
