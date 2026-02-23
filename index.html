@@ -8,6 +8,9 @@
 <style>
 * {
     box-sizing: border-box;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none; /* Standard syntax */
 }
 
 body {
@@ -20,6 +23,13 @@ body {
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
+}
+
+/* Allow text selection for message and footer only */
+.message, .footer, h1, .subtitle {
+    -webkit-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
 }
 
 /* Floating animation - multiple variations */
@@ -108,7 +118,7 @@ body {
     margin-right: auto;
 }
 
-/* Updated gold15 class to red font */
+/* Red 15 */
 .gold15 {
     font-size: clamp(60px, 15vw, 110px);
     font-style: italic;
@@ -151,6 +161,8 @@ body {
 .photo {
     margin-top: 30px;
     padding: 0 15px;
+    position: relative;
+    -webkit-touch-callout: none; /* Disable iOS callout */
 }
 
 .photo img {
@@ -161,6 +173,18 @@ body {
     box-shadow: 0 20px 50px rgba(212, 175, 55, 0.4), 0 0 0 5px rgba(255, 255, 255, 0.8);
     border: 3px solid gold;
     transition: transform 0.3s ease;
+    pointer-events: none; /* Prevents right-click on image specifically */
+}
+
+.photo::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+    z-index: 1;
 }
 
 .photo img:hover {
@@ -269,7 +293,78 @@ h1 {
         width: 200px;
     }
 }
+
+/* Disable dragging */
+img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+}
+
+/* Disable printing */
+@media print {
+    body {
+        display: none;
+    }
+}
 </style>
+
+<!-- Disable right-click and keyboard shortcuts -->
+<script>
+// Disable right-click context menu
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    return false;
+});
+
+// Disable common keyboard shortcuts for copying
+document.addEventListener('keydown', function(e) {
+    // Disable Ctrl+C, Ctrl+X, Ctrl+S, Ctrl+P, Ctrl+U, Ctrl+Shift+I, F12, etc.
+    if (e.ctrlKey || e.metaKey) {
+        // Check for common copy/save shortcuts
+        if (e.key === 'c' || e.key === 'C' || 
+            e.key === 'x' || e.key === 'X' ||
+            e.key === 's' || e.key === 'S' ||
+            e.key === 'p' || e.key === 'P' ||
+            e.key === 'u' || e.key === 'U' ||
+            e.key === 'a' || e.key === 'A') {
+            e.preventDefault();
+            return false;
+        }
+    }
+    
+    // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+    if (e.key === 'F12' || 
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c'))) {
+        e.preventDefault();
+        return false;
+    }
+});
+
+// Additional protection for mobile long-press menu
+document.addEventListener('touchstart', function(e) {
+    if (e.target.tagName === 'IMG') {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+// Disable text selection for protected elements (already handled by CSS)
+
+// Add a subtle watermark in console (optional)
+console.log('%c❤️ Happy 15th Anniversary! ❤️', 'color: red; font-size: 16px; font-weight: bold;');
+console.log('%cThis page is protected and personal.', 'color: #8b0000; font-size: 12px;');
+
+// Prevent viewing source with common shortcuts (additional layer)
+window.addEventListener('load', function() {
+    // Disable right-click again after load (ensures it sticks)
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        return false;
+    });
+});
+</script>
 </head>
 
 <body>
@@ -410,9 +505,10 @@ h1 {
     <div class="subtitle">Years of Love • Laughter • Forever</div>
 
     <div class="photo">
-        <!-- Image with better fallback -->
+        <!-- Image with better fallback and protection -->
         <img src="images/anniversary-photo.jpeg" 
              alt="Our Anniversary Photo" 
+             draggable="false"
              onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDUwIiBoZWlnaHQ9IjQ1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDUwIiBoZWlnaHQ9IjQ1MCIgZmlsbD0iI2ZmZTFlMCIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjQiIGZpbGw9IiM4YjAwMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj7inaTigI3vuI8gMTUgeWVhcnMg4p2k4oCN77iPPC90ZXh0Pjwvc3ZnPg=='">
     </div>
 
