@@ -12,7 +12,7 @@ body {
     font-family: Georgia, serif;
     background: linear-gradient(to bottom, #fff5f7, #fffaf0);
     color: #444;
-    overflow-x: hidden; /* Only prevent sideways scroll */
+    overflow-x: hidden; /* prevent sideways scroll */
 }
 
 /* Floating animation */
@@ -24,9 +24,14 @@ body {
 .floating {
     position: fixed;
     bottom: -50px;
-    font-size: 24px;
+    font-size: 40px; /* bigger for visibility */
     animation: floatUp linear infinite;
-    pointer-events: none; /* So they don't block scrolling */
+    pointer-events: none; /* don't block scrolling */
+}
+
+/* Random rotation for more natural movement */
+.floating:nth-child(odd) {
+    animation-timing-function: ease-in-out;
 }
 
 /* Container content */
@@ -82,6 +87,16 @@ body {
     color: #666;
     padding-bottom: 80px; /* Extra space at bottom */
 }
+
+/* Heartbeat effect for title */
+h1 {
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
 </style>
 </head>
 
@@ -89,14 +104,14 @@ body {
 
 <!-- Floating Hearts and Flowers -->
 <div class="floating" style="left:5%; animation-duration:8s;">💖</div>
-<div class="floating" style="left:15%; animation-duration:10s;">🌸</div>
-<div class="floating" style="left:25%; animation-duration:7s;">💕</div>
-<div class="floating" style="left:35%; animation-duration:12s;">🌹</div>
-<div class="floating" style="left:45%; animation-duration:9s;">💗</div>
-<div class="floating" style="left:55%; animation-duration:11s;">🌺</div>
-<div class="floating" style="left:65%; animation-duration:8s;">💞</div>
-<div class="floating" style="left:75%; animation-duration:10s;">🌷</div>
-<div class="floating" style="left:85%; animation-duration:9s;">💓</div>
+<div class="floating" style="left:15%; animation-duration:10s;">🌹</div>
+<div class="floating" style="left:25%; animation-duration:7s;">🌺</div>
+<div class="floating" style="left:35%; animation-duration:12s;">💞</div>
+<div class="floating" style="left:45%; animation-duration:9s;">🌷</div>
+<div class="floating" style="left:55%; animation-duration:11s;">💓</div>
+<div class="floating" style="left:65%; animation-duration:8s;">🌸</div>
+<div class="floating" style="left:75%; animation-duration:10s;">💗</div>
+<div class="floating" style="left:85%; animation-duration:9s;">💐</div>
 
 <div class="container">
 
