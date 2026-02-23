@@ -108,21 +108,21 @@ body {
     margin-right: auto;
 }
 
+/* Updated gold15 class to red font */
 .gold15 {
     font-size: clamp(60px, 15vw, 110px);
     font-style: italic;
     font-weight: bold;
-    background: linear-gradient(45deg, #d4af37, #ffd700, #fff8dc, #ffd700);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #ff0000;
+    text-shadow: 0 0 20px rgba(255, 0, 0, 0.7), 0 0 40px rgba(255, 105, 180, 0.5);
     animation: glow 2.5s infinite alternate;
     margin: 15px 0;
     line-height: 1.1;
 }
 
 @keyframes glow {
-    from { text-shadow: 0 0 20px rgba(212,175,55,0.7), 0 0 40px rgba(255,105,180,0.3); }
-    to { text-shadow: 0 0 40px rgba(255,215,0,1), 0 0 60px rgba(255,20,147,0.5); }
+    from { text-shadow: 0 0 20px rgba(255, 0, 0, 0.7), 0 0 40px rgba(255, 105, 180, 0.3); }
+    to { text-shadow: 0 0 40px rgba(255, 0, 0, 1), 0 0 60px rgba(255, 20, 147, 0.5); }
 }
 
 .subtitle {
