@@ -8,9 +8,9 @@
 <style>
 * {
     box-sizing: border-box;
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10+ */
-    user-select: none; /* Standard syntax */
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 body {
@@ -18,238 +18,151 @@ body {
     padding: 0;
     text-align: center;
     font-family: Georgia, serif;
-    background: linear-gradient(135deg, #fff0f5 0%, #fff5e6 50%, #fff0f5 100%);
+    background: linear-gradient(135deg, #fff0f5 0%, #fff5e6 100%);
     color: #444;
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
 }
 
-/* Allow text selection for message and footer only */
+/* Allow text selection for readability */
 .message, .footer, h1, .subtitle {
     -webkit-user-select: text;
     -ms-user-select: text;
     user-select: text;
 }
 
-/* Floating animation - multiple variations */
-@keyframes floatUp1 {
-    0% { transform: translateY(100vh) scale(0.5) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(-20vh) scale(1.5) rotate(360deg); opacity: 0; }
-}
-
-@keyframes floatUp2 {
-    0% { transform: translateY(100vh) scale(0.8) rotate(0deg); opacity: 0.9; }
-    100% { transform: translateY(-20vh) scale(1.2) rotate(-180deg); opacity: 0; }
-}
-
-@keyframes floatUp3 {
-    0% { transform: translateY(100vh) scale(0.6) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(-20vh) scale(1.8) rotate(720deg); opacity: 0; }
-}
-
-@keyframes floatSide {
-    0% { transform: translate(0, 100vh) scale(0.7); opacity: 0.8; }
-    25% { transform: translate(50px, 75vh) scale(1); }
-    50% { transform: translate(-50px, 50vh) scale(1.2); }
-    75% { transform: translate(30px, 25vh) scale(1); }
-    100% { transform: translate(0, -20vh) scale(0.7); opacity: 0; }
+/* Simplified floating animation - only one type for better performance */
+@keyframes floatSimple {
+    0% { transform: translateY(100vh) scale(0.8); opacity: 0.9; }
+    100% { transform: translateY(-20vh) scale(1.2); opacity: 0; }
 }
 
 .floating {
     position: fixed;
     bottom: -50px;
     pointer-events: none;
-    text-shadow: 0 0 15px rgba(255, 20, 147, 0.8), 0 0 30px rgba(255, 215, 0, 0.6);
-    animation: floatUp1 linear infinite;
+    text-shadow: 0 0 15px rgba(255, 20, 147, 0.6);
+    animation: floatSimple linear infinite;
     z-index: 9999;
-    filter: drop-shadow(0 0 8px rgba(255, 105, 180, 0.9));
-    will-change: transform, opacity;
-    font-size: 60px;
+    will-change: transform;
+    font-size: 45px;
 }
 
-.floating:nth-child(odd) {
-    animation-name: floatUp2;
-    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.9));
-}
+/* No background decorations - removed for performance */
 
-.floating:nth-child(3n) {
-    animation-name: floatUp3;
-    filter: drop-shadow(0 0 12px rgba(255, 0, 100, 0.8));
-}
-
-.floating:nth-child(5n+2) {
-    animation-name: floatSide;
-    animation-duration: 20s !important;
-}
-
-/* Background floating elements (non-moving) */
-.background-decor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.4;
-}
-
-.bg-emoji {
-    position: absolute;
-    font-size: 40px;
-    opacity: 0.2;
-    animation: none;
-    filter: blur(1px);
-}
-
-/* Container content */
+/* Container content - simplified background */
 .container {
-    padding: 40px 20px 60px;
+    padding: 30px 15px 40px;
     position: relative;
     z-index: 10000;
-    background-color: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(2px);
-    border-radius: 30px;
-    margin: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(3px);
+    border-radius: 25px;
+    margin: 15px;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
 }
 
-/* Red 15 */
+/* Red 15 - simplified animation */
 .gold15 {
-    font-size: clamp(60px, 15vw, 110px);
+    font-size: clamp(50px, 12vw, 90px);
     font-style: italic;
     font-weight: bold;
     color: #ff0000;
-    text-shadow: 0 0 20px rgba(255, 0, 0, 0.7), 0 0 40px rgba(255, 105, 180, 0.5);
-    animation: glow 2.5s infinite alternate;
-    margin: 15px 0;
+    text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+    animation: glow 2s infinite alternate;
+    margin: 10px 0;
     line-height: 1.1;
 }
 
 @keyframes glow {
-    from { text-shadow: 0 0 20px rgba(255, 0, 0, 0.7), 0 0 40px rgba(255, 105, 180, 0.3); }
-    to { text-shadow: 0 0 40px rgba(255, 0, 0, 1), 0 0 60px rgba(255, 20, 147, 0.5); }
+    from { text-shadow: 0 0 15px rgba(255, 0, 0, 0.6); }
+    to { text-shadow: 0 0 30px rgba(255, 0, 0, 0.9); }
 }
 
 .subtitle {
-    font-size: clamp(20px, 5vw, 28px);
-    letter-spacing: 2px;
+    font-size: clamp(18px, 4vw, 24px);
+    letter-spacing: 1px;
     color: #8b0000;
-    text-shadow: 0 0 10px rgba(255,255,255,0.8);
-    margin: 15px 0;
+    margin: 10px 0;
     padding: 0 10px;
 }
 
 .message {
     max-width: 800px;
-    margin: 30px auto;
-    font-size: clamp(16px, 4vw, 20px);
-    line-height: 1.8;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 245, 250, 0.9));
-    padding: clamp(20px, 5vw, 40px);
-    border-radius: 30px;
-    box-shadow: 0 10px 40px rgba(255, 105, 180, 0.2);
-    border: 2px solid rgba(255, 215, 0, 0.3);
-    backdrop-filter: blur(5px);
+    margin: 20px auto;
+    font-size: clamp(15px, 3.5vw, 18px);
+    line-height: 1.7;
+    background: rgba(255, 255, 255, 0.95);
+    padding: clamp(15px, 4vw, 30px);
+    border-radius: 25px;
+    box-shadow: 0 5px 20px rgba(255, 105, 180, 0.15);
+    border: 1px solid rgba(255, 215, 0, 0.3);
     width: 95%;
 }
 
 .photo {
-    margin-top: 30px;
-    padding: 0 15px;
-    position: relative;
-    -webkit-touch-callout: none; /* Disable iOS callout */
+    margin-top: 20px;
+    padding: 0 10px;
 }
 
 .photo img {
-    width: min(450px, 90%);
+    width: min(400px, 85%);
     max-width: 100%;
     height: auto;
-    border-radius: 30px;
-    box-shadow: 0 20px 50px rgba(212, 175, 55, 0.4), 0 0 0 5px rgba(255, 255, 255, 0.8);
-    border: 3px solid gold;
-    transition: transform 0.3s ease;
-    pointer-events: none; /* Prevents right-click on image specifically */
-}
-
-.photo::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: transparent;
-    z-index: 1;
-}
-
-.photo img:hover {
-    transform: scale(1.02);
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3), 0 0 0 3px rgba(255, 255, 255, 0.9);
+    border: 2px solid gold;
+    pointer-events: none;
 }
 
 .footer {
-    margin-top: 40px;
-    font-size: clamp(16px, 4vw, 20px);
+    margin-top: 30px;
+    font-size: clamp(15px, 3.5vw, 18px);
     color: #8b0000;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
     font-weight: bold;
-    text-shadow: 0 0 10px rgba(255,255,255,0.8);
 }
 
-/* Heartbeat effect for title */
+/* Heartbeat effect - simplified */
 h1 {
     animation: heartbeat 1.5s infinite ease-in-out;
     color: #b22222;
-    text-shadow: 0 0 20px rgba(255, 105, 180, 0.8), 0 0 40px rgba(255, 215, 0, 0.5);
-    font-size: clamp(20px, 6vw, 32px);
-    margin: 15px 0;
-    padding: 0 15px;
-    line-height: 1.4;
+    font-size: clamp(18px, 5vw, 28px);
+    margin: 10px 0;
+    padding: 0 10px;
+    line-height: 1.3;
 }
 
 @keyframes heartbeat {
     0%, 100% { transform: scale(1); }
-    25% { transform: scale(1.05); }
-    50% { transform: scale(1.1); }
-    75% { transform: scale(1.05); }
+    50% { transform: scale(1.08); }
 }
 
 /* Mobile optimizations */
 @media (max-width: 768px) {
-    body {
-        background: linear-gradient(135deg, #fff0f5 0%, #fff5e6 100%);
-    }
-    
     .container {
-        padding: 20px 15px 40px;
+        padding: 20px 12px 30px;
         margin: 10px;
-        backdrop-filter: blur(3px);
-    }
-    
-    .message {
-        padding: 20px 15px;
-        margin: 20px auto;
-        width: 100%;
-        border-radius: 20px;
     }
     
     .floating {
-        font-size: 45px !important;
-        filter: drop-shadow(0 0 12px rgba(255, 105, 180, 0.9)) !important;
+        font-size: 35px !important;
+    }
+    
+    .gold15 {
+        font-size: 70px;
     }
     
     h1 {
-        font-size: 24px;
-        line-height: 1.3;
+        font-size: 22px;
     }
     
-    .photo img {
+    .message {
+        padding: 15px;
         border-radius: 20px;
-        box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4), 0 0 0 3px rgba(255, 255, 255, 0.9);
     }
 }
 
@@ -260,54 +173,23 @@ h1 {
     }
     
     h1 {
-        font-size: 20px;
-    }
-    
-    .subtitle {
         font-size: 18px;
     }
     
-    .message {
-        font-size: 15px;
-        padding: 15px;
-    }
-}
-
-/* Landscape mode */
-@media (max-height: 500px) and (orientation: landscape) {
-    .container {
-        padding: 15px;
-    }
-    
-    .message {
-        max-height: 60vh;
-        overflow-y: auto;
-        padding: 15px;
-    }
-    
-    .gold15 {
-        font-size: 40px;
-    }
-    
-    .photo img {
-        width: 200px;
+    .floating {
+        font-size: 30px !important;
     }
 }
 
 /* Disable dragging */
 img {
     -webkit-user-drag: none;
-    -khtml-user-drag: none;
-    -moz-user-drag: none;
-    -o-user-drag: none;
     user-drag: none;
 }
 
 /* Disable printing */
 @media print {
-    body {
-        display: none;
-    }
+    body { display: none; }
 }
 </style>
 
@@ -319,180 +201,110 @@ document.addEventListener('contextmenu', function(e) {
     return false;
 });
 
-// Disable common keyboard shortcuts for copying
+// Disable common keyboard shortcuts
 document.addEventListener('keydown', function(e) {
-    // Disable Ctrl+C, Ctrl+X, Ctrl+S, Ctrl+P, Ctrl+U, Ctrl+Shift+I, F12, etc.
     if (e.ctrlKey || e.metaKey) {
-        // Check for common copy/save shortcuts
-        if (e.key === 'c' || e.key === 'C' || 
-            e.key === 'x' || e.key === 'X' ||
-            e.key === 's' || e.key === 'S' ||
-            e.key === 'p' || e.key === 'P' ||
-            e.key === 'u' || e.key === 'U' ||
-            e.key === 'a' || e.key === 'A') {
+        if (['c','C','x','X','s','S','p','P','u','U','a','A'].includes(e.key)) {
             e.preventDefault();
             return false;
         }
     }
-    
-    // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
-    if (e.key === 'F12' || 
-        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c'))) {
+    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I','i','J','j','C','c'].includes(e.key))) {
         e.preventDefault();
         return false;
     }
 });
 
-// Additional protection for mobile long-press menu
+// Mobile touch protection
 document.addEventListener('touchstart', function(e) {
     if (e.target.tagName === 'IMG') {
         e.preventDefault();
     }
 }, { passive: false });
-
-// Disable text selection for protected elements (already handled by CSS)
-
-// Add a subtle watermark in console (optional)
-console.log('%c❤️ Happy 15th Anniversary! ❤️', 'color: red; font-size: 16px; font-weight: bold;');
-console.log('%cThis page is protected and personal.', 'color: #8b0000; font-size: 12px;');
-
-// Prevent viewing source with common shortcuts (additional layer)
-window.addEventListener('load', function() {
-    // Disable right-click again after load (ensures it sticks)
-    document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-        return false;
-    });
-});
 </script>
 </head>
 
 <body>
 
-<!-- Background static decorations -->
-<div class="background-decor" id="bgDecor"></div>
-
-<!-- Main floating elements generator -->
+<!-- Optimized floating elements - reduced count for mobile performance -->
 <script>
 (function() {
-    // Rich collection of romantic emojis
-    const romanticEmojis = [
-        "❤️", "🧡", "💛", "💚", "💙", "💜", "💖", "💗", "💓", "💞", "💕", "💘", "💝",
-        "🌹", "🥀", "🌺", "🌸", "🌷", "🌼", "🌻", "🌿", "✨", "⭐", "🌟", "💫",
-        "💐", "🌾", "🍃", "🌸", "🌼", "🌹", "❤️‍🔥", "💌", "💋", "👩‍❤️‍👨", "💏", "👩‍❤️‍💋‍👨",
-        "💎", "👑", "💍", "🎀", "🎁", "💝", "💞", "💓", "💗", "💖", "💘", "💕"
-    ];
+    // Simplified emoji collection - fewer options for better performance
+    const emojis = ["❤️","🌹","💖","🌺","💞","🌷","💓","🌸","💗","💐","🥀","💕"];
     
-    // More emojis for variety
-    const extraEmojis = [
-        "💟", "❣️", "💔", "❤️‍🩹", "❤️", "🧡", "💛", "💚", "💙", "💜", "🤎", "🖤", "🤍",
-        "💋", "💌", "💘", "💝", "💖", "💗", "💓", "💞", "💕", "💟", "❣️", "💔"
-    ];
-    
-    // Combine all emojis
-    const allEmojis = [...romanticEmojis, ...extraEmojis];
-    
-    // Function to create floating elements
     function createFloatingElement() {
         const span = document.createElement("div");
         span.className = "floating";
-        
-        // Random horizontal position (full width)
         span.style.left = Math.random() * 100 + "%";
         
-        // Random size between 30px and 100px
-        const size = 30 + Math.random() * 70;
+        // Smaller size range for mobile
+        const size = 25 + Math.random() * 30;
         span.style.fontSize = size + "px";
         
-        // Random animation duration between 8 and 25 seconds (slower = more visible)
-        span.style.animationDuration = (10 + Math.random() * 20) + "s";
-        
-        // Random animation delay
-        span.style.animationDelay = Math.random() * 10 + "s";
-        
-        // Random opacity for variety
-        span.style.opacity = 0.7 + Math.random() * 0.3;
-        
-        // Random emoji
-        span.textContent = allEmojis[Math.floor(Math.random() * allEmojis.length)];
+        // Faster animations so elements disappear quicker
+        span.style.animationDuration = (8 + Math.random() * 8) + "s";
+        span.style.animationDelay = Math.random() * 3 + "s";
+        span.style.opacity = 0.6 + Math.random() * 0.3;
+        span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
         
         document.body.appendChild(span);
         
-        // Remove after animation to prevent too many elements
+        // Remove after animation
         setTimeout(() => {
-            if (span.parentNode) {
-                span.remove();
-            }
-        }, 35000);
+            if (span.parentNode) span.remove();
+        }, 16000);
     }
     
-    // Create background static decorations
-    function createBackgroundDecor() {
-        const bgDecor = document.getElementById('bgDecor');
-        for (let i = 0; i < 50; i++) {
-            const bgEmoji = document.createElement('div');
-            bgEmoji.className = 'bg-emoji';
-            bgEmoji.style.left = Math.random() * 100 + '%';
-            bgEmoji.style.top = Math.random() * 100 + '%';
-            bgEmoji.style.fontSize = (20 + Math.random() * 60) + 'px';
-            bgEmoji.style.opacity = 0.1 + Math.random() * 0.2;
-            bgEmoji.style.transform = `rotate(${Math.random() * 360}deg)`;
-            bgEmoji.textContent = allEmojis[Math.floor(Math.random() * allEmojis.length)];
-            bgDecor.appendChild(bgEmoji);
-        }
+    // Reduced initial batch for mobile
+    const initialCount = window.innerWidth < 768 ? 25 : 40;
+    for (let i = 0; i < initialCount; i++) {
+        setTimeout(createFloatingElement, i * 40);
     }
     
-    // Create initial heavy batch (80 elements)
-    for (let i = 0; i < 80; i++) {
-        setTimeout(createFloatingElement, i * 50);
-    }
+    // Slower interval for mobile
+    const intervalTime = window.innerWidth < 768 ? 800 : 500;
+    setInterval(createFloatingElement, intervalTime);
     
-    // Create background decorations
-    createBackgroundDecor();
-    
-    // Continuously create new floating elements (very frequent)
-    setInterval(createFloatingElement, 300); // New element every 300ms
-    
-    // Additional burst every 5 seconds
+    // Small bursts less frequently
     setInterval(() => {
-        for (let i = 0; i < 10; i++) {
-            setTimeout(createFloatingElement, i * 100);
+        if (window.innerWidth >= 768) {
+            for (let i = 0; i < 3; i++) {
+                setTimeout(createFloatingElement, i * 100);
+            }
         }
-    }, 5000);
-    
+    }, 8000);
 })();
 </script>
 
-<!-- Second generator for even more density -->
+<!-- Second generator - only for desktop -->
 <script>
 (function() {
-    const extraSymbols = ["💕","💞","💓","💗","💖","💘","💝","🌹","🌺","🌸","🌷","🌼","🥀","❤️","💫","✨","⭐","🌟","💐","🌿"];
-    
-    function createExtraFloat() {
-        const floatDiv = document.createElement("div");
-        floatDiv.className = "floating";
-        floatDiv.style.left = Math.random() * 100 + "%";
-        floatDiv.style.fontSize = (25 + Math.random() * 65) + "px";
-        floatDiv.style.animationDuration = (12 + Math.random() * 25) + "s";
-        floatDiv.style.animationDelay = Math.random() * 15 + "s";
-        floatDiv.style.opacity = 0.8 + Math.random() * 0.2;
-        floatDiv.textContent = extraSymbols[Math.floor(Math.random() * extraSymbols.length)];
-        document.body.appendChild(floatDiv);
+    // Only run on desktop
+    if (window.innerWidth >= 768) {
+        const extras = ["💕","💞","💓","💗","💖","💘","🌹","🌺","🌸","🌷"];
         
-        setTimeout(() => {
-            if (floatDiv.parentNode) {
-                floatDiv.remove();
-            }
-        }, 40000);
+        function createExtra() {
+            const div = document.createElement("div");
+            div.className = "floating";
+            div.style.left = Math.random() * 100 + "%";
+            div.style.fontSize = (20 + Math.random() * 35) + "px";
+            div.style.animationDuration = (10 + Math.random() * 10) + "s";
+            div.style.animationDelay = Math.random() * 5 + "s";
+            div.style.opacity = 0.7;
+            div.textContent = extras[Math.floor(Math.random() * extras.length)];
+            document.body.appendChild(div);
+            
+            setTimeout(() => {
+                if (div.parentNode) div.remove();
+            }, 20000);
+        }
+        
+        for (let i = 0; i < 20; i++) {
+            setTimeout(createExtra, i * 60);
+        }
+        
+        setInterval(createExtra, 1000);
     }
-    
-    // Create initial batch
-    for (let i = 0; i < 60; i++) {
-        setTimeout(createExtraFloat, i * 70);
-    }
-    
-    // Keep creating more frequently
-    setInterval(createExtraFloat, 250);
 })();
 </script>
 
@@ -505,7 +317,6 @@ window.addEventListener('load', function() {
     <div class="subtitle">Years of Love • Laughter • Forever</div>
 
     <div class="photo">
-        <!-- Image with better fallback and protection -->
         <img src="images/anniversary-photo.jpeg" 
              alt="Our Anniversary Photo" 
              draggable="false"
@@ -528,22 +339,26 @@ window.addEventListener('load', function() {
 
 </div>
 
-<!-- Extra burst of floating elements on page load -->
+<!-- Small burst on load - reduced for mobile -->
 <script>
-// Immediate burst on page load
 window.addEventListener('load', function() {
-    for (let i = 0; i < 30; i++) {
+    const burstCount = window.innerWidth < 768 ? 10 : 20;
+    for (let i = 0; i < burstCount; i++) {
         setTimeout(() => {
             const burst = document.createElement("div");
             burst.className = "floating";
             burst.style.left = Math.random() * 100 + "%";
-            burst.style.fontSize = (40 + Math.random() * 80) + "px";
-            burst.style.animationDuration = (15 + Math.random() * 30) + "s";
+            burst.style.fontSize = (25 + Math.random() * 30) + "px";
+            burst.style.animationDuration = (10 + Math.random() * 15) + "s";
             burst.style.animationDelay = "0s";
-            burst.style.opacity = "1";
-            burst.textContent = ["❤️","🌹","💖","🌺","💞","🌷","💓","🌸","💗","💐","🥀","💕"][Math.floor(Math.random() * 12)];
+            burst.style.opacity = "0.8";
+            burst.textContent = ["❤️","🌹","💖","🌺","💞","🌷","💓","🌸","💗"][Math.floor(Math.random() * 9)];
             document.body.appendChild(burst);
-        }, i * 100);
+            
+            setTimeout(() => {
+                if (burst.parentNode) burst.remove();
+            }, 20000);
+        }, i * 50);
     }
 });
 </script>
