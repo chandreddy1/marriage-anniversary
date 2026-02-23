@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy 15th Anniversary ❤️</title>
 
 <style>
@@ -28,6 +29,7 @@ body {
     pointer-events: none;
     text-shadow: 0 0 5px rgba(0,0,0,0.3), 0 0 10px rgba(255,0,0,0.5);
     animation: floatUp linear infinite;
+    z-index: 1;
 }
 
 /* Container content */
@@ -94,17 +96,17 @@ h1 {
     50% { transform: scale(1.1); }
 }
 
-/* Page shake on mobile */
+/* REMOVED the page shake on mobile as it causes a bad user experience */
+/* Added a more subtle and appropriate style for mobile if needed, but none is better here */
 @media (max-width: 768px) {
-    body {
-        animation: shake 0.5s infinite;
+    .gold15 {
+        font-size: 80px; /* Slightly smaller on mobile */
     }
-    @keyframes shake {
-        0% { transform: translate(0px, 0px); }
-        25% { transform: translate(2px, -2px); }
-        50% { transform: translate(-2px, 2px); }
-        75% { transform: translate(2px, 2px); }
-        100% { transform: translate(0px, 0px); }
+    .subtitle {
+        font-size: 24px;
+    }
+    .message {
+        font-size: 18px;
     }
 }
 </style>
@@ -121,6 +123,9 @@ h1 {
     <div class="subtitle">Years of Love • Laughter • Forever</div>
 
     <div class="photo">
+        <!-- IMPORTANT: Please ensure the file 'images/anniversary-photo.jpeg' exists, 
+        or replace this with the correct path to your image. 
+        Example: <img src="our-photo.jpg" alt="Our Anniversary Photo"> -->
         <img src="images/anniversary-photo.jpeg" alt="Our Anniversary Photo">
     </div>
 
@@ -130,7 +135,7 @@ h1 {
         we have built a life filled with love.<br><br>
         Today, I celebrate not just our past,
         but every tomorrow we will share.<br><br>
-        Here’s to us. To forever. ❤️
+        Here's to us. To forever. ❤️
     </div>
 
     <div class="footer">
@@ -142,17 +147,19 @@ h1 {
 
 <!-- Floating hearts and flowers generated dynamically -->
 <script>
-const emojis = ["🌹","💖","🌺","💞","🌷","💓","🌸","💗","💐"];
-for (let i = 0; i < 25; i++) {  // number of floating items
-    const span = document.createElement("div");
-    span.className = "floating";
-    span.style.left = Math.random() * 90 + "%";
-    span.style.fontSize = 30 + Math.random() * 50 + "px"; // random size 30-80px
-    span.style.animationDuration = 5 + Math.random() * 10 + "s"; // 5-15s
-    span.style.animationDelay = Math.random() * 5 + "s";
-    span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-    document.body.appendChild(span);
-}
+(function() {
+    const emojis = ["🌹","💖","🌺","💞","🌷","💓","🌸","💗","💐", "❤️", "🥀", "🌼"];
+    for (let i = 0; i < 25; i++) {  // number of floating items
+        const span = document.createElement("div");
+        span.className = "floating";
+        span.style.left = Math.random() * 90 + "%";
+        span.style.fontSize = (30 + Math.random() * 50) + "px"; // random size 30-80px
+        span.style.animationDuration = (5 + Math.random() * 10) + "s"; // 5-15s
+        span.style.animationDelay = Math.random() * 5 + "s";
+        span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        document.body.appendChild(span);
+    }
+})();
 </script>
 
 </body>
