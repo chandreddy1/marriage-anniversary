@@ -12,10 +12,27 @@ body {
     font-family: Georgia, serif;
     background: linear-gradient(to bottom, #fff5f7, #fffaf0);
     color: #444;
+    overflow: hidden;
 }
 
+/* Floating animation */
+@keyframes floatUp {
+    0% { transform: translateY(100vh) scale(1); opacity: 1; }
+    100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+}
+
+.floating {
+    position: fixed;
+    bottom: -50px;
+    font-size: 24px;
+    animation: floatUp linear infinite;
+}
+
+/* Container content */
 .container {
     padding: 60px 20px;
+    position: relative;
+    z-index: 2;
 }
 
 .gold15 {
@@ -64,21 +81,30 @@ body {
     color: #666;
 }
 </style>
-
 </head>
 
 <body>
 
+<!-- Floating Hearts and Flowers -->
+<div class="floating" style="left:5%; animation-duration:8s;">💖</div>
+<div class="floating" style="left:15%; animation-duration:10s;">🌸</div>
+<div class="floating" style="left:25%; animation-duration:7s;">💕</div>
+<div class="floating" style="left:35%; animation-duration:12s;">🌹</div>
+<div class="floating" style="left:45%; animation-duration:9s;">💗</div>
+<div class="floating" style="left:55%; animation-duration:11s;">🌺</div>
+<div class="floating" style="left:65%; animation-duration:8s;">💞</div>
+<div class="floating" style="left:75%; animation-duration:10s;">🌷</div>
+<div class="floating" style="left:85%; animation-duration:9s;">💓</div>
+
 <div class="container">
 
-    <h1>Happy Anniversary My Love ❤️</h1>
+    <h1>Happy 15th Anniversary My Love ❤️</h1>
 
     <div class="gold15">15</div>
 
     <div class="subtitle">Years of Love • Laughter • Forever</div>
 
     <div class="photo">
-        <!-- Replace with your own image file -->
         <img src="images/anniversary-photo.jpeg" alt="Our Anniversary Photo">
     </div>
 
