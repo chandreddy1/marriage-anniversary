@@ -14,29 +14,40 @@ body {
     background: linear-gradient(to bottom, #fff5f7, #fffaf0);
     color: #444;
     overflow-x: hidden;
+    min-height: 100vh;
     position: relative;
 }
 
 /* Floating animation */
 @keyframes floatUp {
-    0% { transform: translateY(100vh) scale(1); opacity: 1; }
-    100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    0% { 
+        transform: translateY(100vh) scale(0.8); 
+        opacity: 0.8; 
+    }
+    100% { 
+        transform: translateY(-20vh) scale(1.2); 
+        opacity: 0; 
+    }
 }
 
 .floating {
     position: fixed;
-    font-size: 50px;
+    bottom: -10px;
     pointer-events: none;
-    text-shadow: 0 0 5px rgba(0,0,0,0.3), 0 0 10px rgba(255,0,0,0.5);
+    text-shadow: 0 0 10px rgba(255, 105, 180, 0.6), 0 0 20px rgba(255, 215, 0, 0.5);
     animation: floatUp linear infinite;
-    z-index: 1;
+    z-index: 9999;
+    filter: drop-shadow(0 0 5px rgba(255, 192, 203, 0.8));
+    will-change: transform, opacity;
 }
 
 /* Container content */
 .container {
     padding: 60px 20px;
     position: relative;
-    z-index: 2;
+    z-index: 10000;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(1px);
 }
 
 .gold15 {
@@ -66,6 +77,10 @@ body {
     margin: 40px auto;
     font-size: 20px;
     line-height: 1.8;
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.05);
 }
 
 .photo {
@@ -77,6 +92,7 @@ body {
     max-width: 90%;
     border-radius: 20px;
     box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    border: 5px solid white;
 }
 
 .footer {
@@ -89,30 +105,84 @@ body {
 /* Heartbeat effect for title */
 h1 {
     animation: heartbeat 1.5s infinite;
+    color: #b22222;
+    text-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
 }
 
 @keyframes heartbeat {
     0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+    50% { transform: scale(1.05); }
 }
 
-/* REMOVED the page shake on mobile as it causes a bad user experience */
-/* Added a more subtle and appropriate style for mobile if needed, but none is better here */
 @media (max-width: 768px) {
     .gold15 {
-        font-size: 80px; /* Slightly smaller on mobile */
+        font-size: 80px;
     }
     .subtitle {
         font-size: 24px;
     }
     .message {
         font-size: 18px;
+        padding: 20px;
+    }
+    .floating {
+        font-size: 40px !important;
     }
 }
 </style>
 </head>
 
 <body>
+
+<!-- Floating hearts and flowers - now visible and flowing -->
+<script>
+(function() {
+    // Create floating elements immediately
+    const emojis = ["🌹","❤️","🌺","💖","🌷","💓","🌸","💗","💐","🥀","🌼","💕","💘","💝","🌹","❤️"];
+    
+    function createFloatingElement() {
+        const span = document.createElement("div");
+        span.className = "floating";
+        
+        // Random horizontal position (0% to 100%)
+        span.style.left = Math.random() * 100 + "%";
+        
+        // Random size between 30px and 90px
+        const size = 30 + Math.random() * 60;
+        span.style.fontSize = size + "px";
+        
+        // Random animation duration between 6 and 18 seconds
+        span.style.animationDuration = (6 + Math.random() * 12) + "s";
+        
+        // Random animation delay
+        span.style.animationDelay = Math.random() * 5 + "s";
+        
+        // Random emoji
+        span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        
+        document.body.appendChild(span);
+        
+        // Remove element after animation completes to prevent memory issues
+        setTimeout(() => {
+            if (span.parentNode) {
+                span.remove();
+            }
+        }, 20000); // Remove after 20 seconds
+    }
+    
+    // Create initial batch of 30 floating elements
+    for (let i = 0; i < 30; i++) {
+        // Slight delay between creations for more natural effect
+        setTimeout(createFloatingElement, i * 200);
+    }
+    
+    // Continuously create new floating elements
+    setInterval(() => {
+        createFloatingElement();
+    }, 1000); // Create a new one every second
+    
+})();
+</script>
 
 <div class="container">
 
@@ -123,10 +193,8 @@ h1 {
     <div class="subtitle">Years of Love • Laughter • Forever</div>
 
     <div class="photo">
-        <!-- IMPORTANT: Please ensure the file 'images/anniversary-photo.jpeg' exists, 
-        or replace this with the correct path to your image. 
-        Example: <img src="our-photo.jpg" alt="Our Anniversary Photo"> -->
-        <img src="images/anniversary-photo.jpeg" alt="Our Anniversary Photo">
+        <!-- IMPORTANT: Update this path to your actual image location -->
+        <img src="images/anniversary-photo.jpeg" alt="Our Anniversary Photo" onerror="this.style.display='none'">
     </div>
 
     <div class="message">
@@ -145,20 +213,38 @@ h1 {
 
 </div>
 
-<!-- Floating hearts and flowers generated dynamically -->
+<!-- Add a second script for continuous floating elements -->
 <script>
 (function() {
-    const emojis = ["🌹","💖","🌺","💞","🌷","💓","🌸","💗","💐", "❤️", "🥀", "🌼"];
-    for (let i = 0; i < 25; i++) {  // number of floating items
-        const span = document.createElement("div");
-        span.className = "floating";
-        span.style.left = Math.random() * 90 + "%";
-        span.style.fontSize = (30 + Math.random() * 50) + "px"; // random size 30-80px
-        span.style.animationDuration = (5 + Math.random() * 10) + "s"; // 5-15s
-        span.style.animationDelay = Math.random() * 5 + "s";
-        span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-        document.body.appendChild(span);
+    // Additional variety of floating elements with different timing
+    const symbols = ["💕","💞","💓","💗","💖","💘","💝","🌹","🌺","🌸","🌷","🌼","🌻","🥀","❤️","🧡","💛","💚","💙","💜"];
+    
+    function createExtraFloat() {
+        const floatDiv = document.createElement("div");
+        floatDiv.className = "floating";
+        floatDiv.style.left = Math.random() * 100 + "%";
+        floatDiv.style.fontSize = (20 + Math.random() * 50) + "px";
+        floatDiv.style.animationDuration = (8 + Math.random() * 15) + "s";
+        floatDiv.style.animationDelay = Math.random() * 8 + "s";
+        floatDiv.style.opacity = "0.9";
+        floatDiv.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        document.body.appendChild(floatDiv);
+        
+        // Clean up
+        setTimeout(() => {
+            if (floatDiv.parentNode) {
+                floatDiv.remove();
+            }
+        }, 25000);
     }
+    
+    // Create initial batch
+    for (let i = 0; i < 20; i++) {
+        setTimeout(createExtraFloat, i * 150);
+    }
+    
+    // Keep creating more
+    setInterval(createExtraFloat, 1200);
 })();
 </script>
 
