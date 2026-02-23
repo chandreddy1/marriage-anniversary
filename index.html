@@ -24,12 +24,15 @@ body {
 .floating {
     position: fixed;
     bottom: -50px;
-    font-size: 40px; /* bigger for visibility */
+    font-size: 70px; /* bigger for visibility */
     animation: floatUp linear infinite;
     pointer-events: none; /* don't block scrolling */
+    text-shadow: 
+        2px 2px 4px rgba(0,0,0,0.3), 
+        0 0 10px rgba(255,0,0,0.5); /* glow for visibility */
 }
 
-/* Random rotation for more natural movement */
+/* Random rotation for natural movement */
 .floating:nth-child(odd) {
     animation-timing-function: ease-in-out;
 }
@@ -103,15 +106,15 @@ h1 {
 <body>
 
 <!-- Floating Hearts and Flowers -->
-<div class="floating" style="left:5%; animation-duration:8s;">💖</div>
-<div class="floating" style="left:15%; animation-duration:10s;">🌹</div>
-<div class="floating" style="left:25%; animation-duration:7s;">🌺</div>
-<div class="floating" style="left:35%; animation-duration:12s;">💞</div>
-<div class="floating" style="left:45%; animation-duration:9s;">🌷</div>
-<div class="floating" style="left:55%; animation-duration:11s;">💓</div>
-<div class="floating" style="left:65%; animation-duration:8s;">🌸</div>
-<div class="floating" style="left:75%; animation-duration:10s;">💗</div>
-<div class="floating" style="left:85%; animation-duration:9s;">💐</div>
+<div class="floating" style="left:5%; font-size:75px; animation-duration:9s;">🌹</div>
+<div class="floating" style="left:15%; font-size:70px; animation-duration:11s;">💖</div>
+<div class="floating" style="left:25%; font-size:65px; animation-duration:8s;">🌺</div>
+<div class="floating" style="left:35%; font-size:75px; animation-duration:10s;">💞</div>
+<div class="floating" style="left:45%; font-size:68px; animation-duration:12s;">🌷</div>
+<div class="floating" style="left:55%; font-size:70px; animation-duration:9s;">💓</div>
+<div class="floating" style="left:65%; font-size:65px; animation-duration:11s;">🌸</div>
+<div class="floating" style="left:75%; font-size:72px; animation-duration:10s;">💗</div>
+<div class="floating" style="left:85%; font-size:68px; animation-duration:9s;">💐</div>
 
 <div class="container">
 
